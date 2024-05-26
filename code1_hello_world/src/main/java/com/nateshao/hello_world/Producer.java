@@ -1,4 +1,4 @@
-package com.nateshao.code1_hello_world;
+package com.nateshao.hello_world;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
