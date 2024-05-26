@@ -10,6 +10,7 @@
         <module name="code4_routing" />
         <module name="code1_hello_world" />
         <module name="code3_publish_subscribe" />
+        <module name="code5_topics" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -22,6 +23,7 @@
       <module name="code2_work_queue" options="-parameters" />
       <module name="code3_publish_subscribe" options="-parameters" />
       <module name="code4_routing" options="-parameters" />
+      <module name="code5_topics" options="-parameters" />
       <module name="routing" options="-parameters" />
     </option>
   </component>
