@@ -3,8 +3,7 @@ package com.nateshao.topics;
 import com.nateshao.topics.util.ConnectionUtil;
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;  
-import com.rabbitmq.client.Connection;  
-import com.rabbitmq.client.ConnectionFactory;  
+import com.rabbitmq.client.Connection;
   
 public class Producer {  
   
