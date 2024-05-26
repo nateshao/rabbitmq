@@ -8,6 +8,8 @@
         <option value="$PROJECT_DIR$/code1_hello_world/pom.xml" />
         <option value="$PROJECT_DIR$/code2_work_queue/pom.xml" />
         <option value="$PROJECT_DIR$/code3_pubsub/pom.xml" />
+        <option value="$PROJECT_DIR$/code4_routing/pom.xml" />
+        <option value="$PROJECT_DIR$/code3_publish_subscribe/pom.xml" />
       </list>
     </option>
   </component>
