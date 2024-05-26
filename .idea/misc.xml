@@ -11,7 +11,13 @@
         <option value="$PROJECT_DIR$/code4_routing/pom.xml" />
         <option value="$PROJECT_DIR$/code3_publish_subscribe/pom.xml" />
         <option value="$PROJECT_DIR$/code5_topics/pom.xml" />
+        <option value="$PROJECT_DIR$/demo/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/demo/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK" />
