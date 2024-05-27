@@ -12,6 +12,10 @@
         <option value="$PROJECT_DIR$/code3_publish_subscribe/pom.xml" />
         <option value="$PROJECT_DIR$/code5_topics/pom.xml" />
         <option value="$PROJECT_DIR$/demo/pom.xml" />
+        <option value="$PROJECT_DIR$/code6_springboot_consumer/pom.xml" />
+        <option value="$PROJECT_DIR$/code6_springboot_producer/pom.xml" />
+        <option value="$PROJECT_DIR$/code7_confirm_consumer/pom.xml" />
+        <option value="$PROJECT_DIR$/code7_confirm_producer/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

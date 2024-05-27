@@ -1,0 +1,13 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 11111
+    username: atguigu
+    password: 123456
+    virtual-host: /
+    listener:
+      simple:
+        acknowledge-mode: manual
+logging:
+  level:
+    com.atguigu.mq.listener.MyProcessor: info
