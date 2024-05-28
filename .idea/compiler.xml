@@ -6,14 +6,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="code2_work_queue" />
         <module name="code4_routing" />
-        <module name="code7_confirm_producer" />
+        <module name="code9_cluster_consumer" />
+        <module name="code8_tx_producer" />
         <module name="code6_springboot_producer" />
         <module name="code7_confirm_consumer" />
         <module name="code3_publish_subscribe" />
         <module name="code5_topics" />
+        <module name="code11_federation_consumer" />
+        <module name="code2_work_queue" />
+        <module name="code7_confirm_producer" />
         <module name="code6_springboot_consumer" />
+        <module name="code10_stearm" />
+        <module name="code9_cluster_producer" />
         <module name="code1_hello_world" />
       </profile>
     </annotationProcessing>
@@ -24,6 +29,8 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="code10_stearm" options="-parameters" />
+      <module name="code11_federation_consumer" options="-parameters" />
       <module name="code1_hello_world" options="-parameters" />
       <module name="code2_work_queue" options="-parameters" />
       <module name="code3_publish_subscribe" options="-parameters" />
@@ -33,6 +40,9 @@
       <module name="code6_springboot_producer" options="-parameters" />
       <module name="code7_confirm_consumer" options="-parameters" />
       <module name="code7_confirm_producer" options="-parameters" />
+      <module name="code8_tx_producer" options="-parameters" />
+      <module name="code9_cluster_consumer" options="-parameters" />
+      <module name="code9_cluster_producer" options="-parameters" />
       <module name="demo" options="-parameters" />
       <module name="routing" options="-parameters" />
     </option>

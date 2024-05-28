@@ -1,5 +1,6 @@
 package com.nateshao.producer;
 
+
 import org.junit.jupiter.api.Test;
 import org.springframework.amqp.core.MessagePostProcessor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

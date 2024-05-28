@@ -20,7 +20,7 @@ public class MyMessageListener {
     public static final String QUEUE_DEAD_LETTER = "queue.dead.letter.video";
     public static final String QUEUE_DELAY = "queue.test.delay";
 
-    // @RabbitListener(queues = {QUEUE_NAME})
+//     @RabbitListener(queues = {QUEUE_NAME})
     public void processMessage(String dataString, Message message, Channel channel) throws IOException {
 
         // 获取当前消息的 deliveryTag

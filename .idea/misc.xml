@@ -16,6 +16,11 @@
         <option value="$PROJECT_DIR$/code6_springboot_producer/pom.xml" />
         <option value="$PROJECT_DIR$/code7_confirm_consumer/pom.xml" />
         <option value="$PROJECT_DIR$/code7_confirm_producer/pom.xml" />
+        <option value="$PROJECT_DIR$/code8_tx_producer/pom.xml" />
+        <option value="$PROJECT_DIR$/code9_cluster_producer/pom.xml" />
+        <option value="$PROJECT_DIR$/code9_cluster_consumer/pom.xml" />
+        <option value="$PROJECT_DIR$/code10_stearm/pom.xml" />
+        <option value="$PROJECT_DIR$/code11_federation_consumer/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
