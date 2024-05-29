@@ -4,9 +4,15 @@
 
 Hi，大家好，我是千羽。
 
-今天学习一下消息队列，工作上也有用redis作为队列的。
+今天学习一下消息队列，作为程序员，工作上对此再熟悉不过了，当然也有用redis作为队列的。
 
-完整代码，已经放到GitHub：
+
+
+完整代码，已经放到
+
+Gitee：https://gitee.com/nateshao/rabbitmp
+
+GitHub：https://github.com/nateshao/rabbitmp
 
 ## 一、什么是消息队列
 
@@ -108,7 +114,7 @@ docker run -d \
 rabbitmq:3.13-management
 ```
 
-![image-20240525174857074](./assets/image-20240525174857074-6634829-6634831-6634833-6634836-6634839.png)
+![](https://nateshao-blog.oss-cn-shenzhen.aliyuncs.com/wximage-20240525174857074-6634829-6634831-6634833-6634836-6634839.png)
 
 ### 二、验证
 

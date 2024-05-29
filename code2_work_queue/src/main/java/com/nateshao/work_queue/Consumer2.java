@@ -27,7 +27,7 @@ public class Consumer2 {
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
 
-                System.out.println("Consumer1 body：" + new String(body));
+                System.out.println("Consumer2 body：" + new String(body));
 
             }
 
