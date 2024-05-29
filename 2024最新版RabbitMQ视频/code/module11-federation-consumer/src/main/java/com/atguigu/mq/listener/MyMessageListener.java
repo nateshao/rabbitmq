@@ -9,7 +9,12 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Component
-@Slf4j
+@Slf4j/**
+ * @Author 千羽
+ * @公众号 程序员千羽
+ * @Date 2024/5/29 16:00
+ * @Version 1.0
+ */
 public class MyMessageListener {
 
     public static final String QUEUE_NAME = "fed.queue.demo";

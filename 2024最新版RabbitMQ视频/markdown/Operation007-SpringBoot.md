@@ -64,7 +64,12 @@ package com.atguigu.mq;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication/**
+ * @Author 千羽
+ * @公众号 程序员千羽
+ * @Date 2024/5/29 16:00
+ * @Version 1.0
+ */
 public class RabbitMQConsumerMainType {
 
     public static void main(String[] args) {
@@ -93,7 +98,12 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 @Component
-@Slf4j
+@Slf4j/**
+ * @Author 千羽
+ * @公众号 程序员千羽
+ * @Date 2024/5/29 16:00
+ * @Version 1.0
+ */
 public class MyMessageListener {
   
     public static final String EXCHANGE_DIRECT = "exchange.direct.order";  
@@ -191,7 +201,12 @@ package com.atguigu.mq;
 import org.springframework.boot.SpringApplication;  
 import org.springframework.boot.autoconfigure.SpringBootApplication;  
   
-@SpringBootApplication
+@SpringBootApplication/**
+ * @Author 千羽
+ * @公众号 程序员千羽
+ * @Date 2024/5/29 16:00
+ * @Version 1.0
+ */
 public class RabbitMQProducerMainType {
 
     public static void main(String[] args) {
@@ -213,7 +228,12 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest  
+@SpringBootTest  /**
+ * @Author 千羽
+ * @公众号 程序员千羽
+ * @Date 2024/5/29 16:00
+ * @Version 1.0
+ */
 public class RabbitMQTest {  
   
     public static final String EXCHANGE_DIRECT = "exchange.direct.order";  

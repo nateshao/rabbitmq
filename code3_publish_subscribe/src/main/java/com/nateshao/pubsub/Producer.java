@@ -4,7 +4,12 @@ import com.nateshao.pubsub.util.ConnectionUtil;
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
-
+/**
+ * @Author 千羽
+ * @公众号 程序员千羽
+ * @Date 2024/5/29 16:00
+ * @Version 1.0
+ */
 public class Producer {
     public static void main(String[] args) throws Exception {
 

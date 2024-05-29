@@ -85,7 +85,12 @@ package com.atguigu.mq;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication/**
+ * @Author 千羽
+ * @公众号 程序员千羽
+ * @Date 2024/5/29 16:00
+ * @Version 1.0
+ */
 public class RabbitMQPriorityProducer {
 
     public static void main(String[] args) {
@@ -115,7 +120,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+@SpringBootTest/**
+ * @Author 千羽
+ * @公众号 程序员千羽
+ * @Date 2024/5/29 16:00
+ * @Version 1.0
+ */
 public class RabbitMQTest {
 
     public static final String EXCHANGE_PRIORITY = "exchange.test.priority";
@@ -220,7 +230,12 @@ package com.atguigu.mq;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication/**
+ * @Author 千羽
+ * @公众号 程序员千羽
+ * @Date 2024/5/29 16:00
+ * @Version 1.0
+ */
 public class RabbitMQPriorityConsumer {
 
     public static void main(String[] args) {
@@ -244,7 +259,12 @@ import org.springframework.amqp.rabbit.annotation.*;
 import org.springframework.stereotype.Component;
 
 @Slf4j
-@Component
+@Component/**
+ * @Author 千羽
+ * @公众号 程序员千羽
+ * @Date 2024/5/29 16:00
+ * @Version 1.0
+ */
 public class MyMessageProcessor {
 
     public static final String QUEUE_PRIORITY = "queue.test.priority";

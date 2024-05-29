@@ -51,7 +51,12 @@ package com.atguigu.mq;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication/**
+ * @Author 千羽
+ * @公众号 程序员千羽
+ * @Date 2024/5/29 16:00
+ * @Version 1.0
+ */
 public class RabbitMQProducerMainType {
 
     public static void main(String[] args) {
@@ -76,7 +81,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@Data
+@Data/**
+ * @Author 千羽
+ * @公众号 程序员千羽
+ * @Date 2024/5/29 16:00
+ * @Version 1.0
+ */
 public class RabbitConfig {
 
     @Bean
@@ -107,7 +117,12 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-@Slf4j
+@Slf4j/**
+ * @Author 千羽
+ * @公众号 程序员千羽
+ * @Date 2024/5/29 16:00
+ * @Version 1.0
+ */
 public class RabbitMQTest {
 
     public static final String EXCHANGE_NAME = "exchange.tx.dragon";

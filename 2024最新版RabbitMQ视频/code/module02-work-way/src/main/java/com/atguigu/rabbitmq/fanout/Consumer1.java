@@ -3,8 +3,12 @@ package com.atguigu.rabbitmq.fanout;
 import com.atguigu.rabbitmq.util.ConnectionUtil;  
 import com.rabbitmq.client.*;  
 import java.io.IOException;  
-  
-public class Consumer1 {  
+  /**
+ * @Author 千羽
+ * @公众号 程序员千羽
+ * @Date 2024/5/29 16:00
+ * @Version 1.0
+ */ Consumer1 {
   
     public static void main(String[] args) throws Exception {  
   
