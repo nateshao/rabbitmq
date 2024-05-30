@@ -3,7 +3,8 @@ package com.nateshao.consumer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication/**
+@SpringBootApplication
+/**
  * @Author 千羽
  * @公众号 程序员千羽
  * @Date 2024/5/29 16:00
