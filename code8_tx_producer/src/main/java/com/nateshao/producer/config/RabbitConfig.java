@@ -8,13 +8,14 @@ import org.springframework.amqp.rabbit.transaction.RabbitTransactionManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
-@Data/**
+/**
  * @Author 千羽
  * @公众号 程序员千羽
  * @Date 2024/5/29 16:00
  * @Version 1.0
  */
+@Configuration
+@Data
 public class RabbitConfig {
 
     @Bean

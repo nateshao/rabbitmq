@@ -11,21 +11,22 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-@Component
-@Slf4j/**
+/**
  * @Author 千羽
  * @公众号 程序员千羽
  * @Date 2024/5/29 16:00
  * @Version 1.0
  */
+@Component
+@Slf4j
 public class MyMessageListener {
 
-    public static final String QUEUE_NAME  = "queue.order";
+    public static final String QUEUE_NAME = "queue.order";
     public static final String QUEUE_NORMAL = "queue.normal.video";
     public static final String QUEUE_DEAD_LETTER = "queue.dead.letter.video";
     public static final String QUEUE_DELAY = "queue.test.delay";
 
-//     @RabbitListener(queues = {QUEUE_NAME})
+    //     @RabbitListener(queues = {QUEUE_NAME})
     public void processMessage(String dataString, Message message, Channel channel) throws IOException {
 
         // 获取当前消息的 deliveryTag

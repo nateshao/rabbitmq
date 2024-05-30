@@ -8,13 +8,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-@SpringBootTest
-@Slf4j/**
+/**
  * @Author 千羽
  * @公众号 程序员千羽
  * @Date 2024/5/29 16:00
  * @Version 1.0
  */
+@SpringBootTest
+@Slf4j
 public class RabbitMQTest {
 
     public static final String EXCHANGE_NAME = "exchange.tx.dragon";

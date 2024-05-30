@@ -2,7 +2,7 @@
 
 # 一、创建module
 
-![images](assets/img77.png)
+![](https://nateshao-blog.oss-cn-shenzhen.aliyuncs.com/image-20240530231127296.png)
 
 
 
@@ -11,26 +11,35 @@
 ## 1、配置POM
 
 ```xml
-<parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.1.5</version>
-</parent>
-
-<dependencies>
-    <dependency>
+ <parent>
         <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-amqp</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-test</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok</artifactId>
-    </dependency>
-</dependencies>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.1.5</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.nateshao</groupId>
+    <artifactId>code7_confirm_consumer</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>code7_confirm_consumer</name>
+    <description>code7_confirm_consumer</description>
+    <properties>
+        <java.version>17</java.version>
+    </properties>
+    
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
 ```
 
 
@@ -40,17 +49,18 @@
 没有特殊设定：
 
 ```java
-package com.atguigu.mq;  
+package com.nateshao.producer.mq;
   
 import org.springframework.boot.SpringApplication;  
 import org.springframework.boot.autoconfigure.SpringBootApplication;  
   
-@SpringBootApplication/**
+/**
  * @Author 千羽
  * @公众号 程序员千羽
  * @Date 2024/5/29 16:00
  * @Version 1.0
  */
+@SpringBootApplication
 public class RabbitMQProducerMainType {
 
     public static void main(String[] args) {
@@ -69,7 +79,7 @@ public class RabbitMQProducerMainType {
 ```yaml
 spring:
   rabbitmq:
-    host: 192.168.200.100
+    host: localhost
     port: 5672
     username: guest
     password: 123456
@@ -78,7 +88,7 @@ spring:
     publisher-returns: true # 队列的确认
 logging:
   level:
-    com.atguigu.mq.config.MQProducerAckConfig: info
+    com.nateshao.producer.config.MQProducerAckConfig: info
 ```
 
 
@@ -183,8 +193,6 @@ ReturnedMessage类中主要属性含义如下：
 
 加@Component注解，加入IOC容器
 
-
-
 ### ②要点2
 
 配置类自身实现ConfirmCallback、ReturnCallback这两个接口，然后通过this指针把配置类的对象设置到RabbitTemplate对象中。
@@ -212,7 +220,7 @@ ReturnedMessage类中主要属性含义如下：
 有了以上说明，下面我们就可以展示配置类的整体代码：
 
 ```java
-package com.atguigu.mq.config;
+package com.nateshao.producer.mq.config;
 
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
@@ -220,42 +228,43 @@ import org.springframework.amqp.core.ReturnedMessage;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
-@Component
-@Slf4j/**
+/**
  * @Author 千羽
  * @公众号 程序员千羽
  * @Date 2024/5/29 16:00
  * @Version 1.0
  */
-public class MQProducerAckConfig implements RabbitTemplate.ConfirmCallback, RabbitTemplate.ReturnsCallback{
+@Configuration
+@Slf4j
+public class RabbitConfig implements RabbitTemplate.ConfirmCallback, RabbitTemplate.ReturnsCallback {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
     @PostConstruct
-    public void init() {
+    public void initRabbitTemplate() {
         rabbitTemplate.setConfirmCallback(this);
         rabbitTemplate.setReturnsCallback(this);
     }
 
     @Override
     public void confirm(CorrelationData correlationData, boolean ack, String cause) {
-        if (ack) {
-            log.info("消息发送到交换机成功！数据：" + correlationData);
-        } else {
-            log.info("消息发送到交换机失败！数据：" + correlationData + " 原因：" + cause);
-        }
+        // 消息发送到交换机成功或失败时调用这个方法
+        log.info("confirm() 回调函数打印 CorrelationData：" + correlationData);
+        log.info("confirm() 回调函数打印 ack：" + ack);
+        log.info("confirm() 回调函数打印 cause：" + cause);
     }
 
     @Override
     public void returnedMessage(ReturnedMessage returned) {
-        log.info("消息主体: " + new String(returned.getMessage().getBody()));
-        log.info("应答码: " + returned.getReplyCode());
-        log.info("描述：" + returned.getReplyText());
-        log.info("消息使用的交换器 exchange : " + returned.getExchange());
-        log.info("消息使用的路由键 routing : " + returned.getRoutingKey());
+        // 发送到队列失败时才调用这个方法
+        log.info("returnedMessage() 回调函数 消息主体: " + new String(returned.getMessage().getBody()));
+        log.info("returnedMessage() 回调函数 应答码: " + returned.getReplyCode());
+        log.info("returnedMessage() 回调函数 描述：" + returned.getReplyText());
+        log.info("returnedMessage() 回调函数 消息使用的交换器 exchange : " + returned.getExchange());
+        log.info("returnedMessage() 回调函数 消息使用的路由键 routing : " + returned.getRoutingKey());
     }
 }
 ```
@@ -265,36 +274,120 @@ public class MQProducerAckConfig implements RabbitTemplate.ConfirmCallback, Rabb
 # 四、发送消息
 
 ```java
-package com.atguigu.mq.test;
-  
+package com.nateshao.producer;
+
+
 import org.junit.jupiter.api.Test;
+import org.springframework.amqp.core.MessagePostProcessor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest  /**
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+/**
  * @Author 千羽
  * @公众号 程序员千羽
  * @Date 2024/5/29 16:00
  * @Version 1.0
  */
-public class RabbitMQTest {  
-  
+@SpringBootTest
+public class RabbitMQTest {
+
     public static final String EXCHANGE_DIRECT = "exchange.direct.order";
+    public static final String EXCHANGE_TIMEOUT = "exchange.test.timeout";
     public static final String ROUTING_KEY = "order";
-  
-    @Autowired  
+    public static final String ROUTING_KEY_TIMEOUT = "routing.key.test.timeout";
+    public static final String EXCHANGE_NORMAL = "exchange.normal.video";
+    public static final String ROUTING_KEY_NORMAL = "routing.key.normal.video";
+    public static final String EXCHANGE_DELAY = "exchange.test.delay";
+    public static final String ROUTING_KEY_DELAY = "routing.key.test.delay";
+
+    @Autowired
     private RabbitTemplate rabbitTemplate;
-  
-    @Test  
-    public void testSendMessage() {  
-        rabbitTemplate.convertAndSend(  
-                EXCHANGE_DIRECT,   
-                ROUTING_KEY,   
-                "Hello atguigu");  
-    }  
-  
+
+    @Test
+    public void test01SendMessage() {
+        rabbitTemplate.convertAndSend(EXCHANGE_DIRECT, ROUTING_KEY + "~", "Message Test Confirm~~~ ~~~");
+    }
+
+    @Test
+    public void test02SendMessage() {
+        for (int i = 0; i < 100; i++) {
+            rabbitTemplate.convertAndSend(EXCHANGE_DIRECT, ROUTING_KEY, "Test Prefetch " + i);
+        }
+    }
+
+    @Test
+    public void test03SendMessage() {
+        for (int i = 0; i < 100; i++) {
+            rabbitTemplate.convertAndSend(EXCHANGE_TIMEOUT, ROUTING_KEY_TIMEOUT, "Test timeout " + i);
+        }
+    }
+
+    @Test
+    public void test04SendMessage() {
+
+        // 创建消息后置处理器对象
+        MessagePostProcessor postProcessor = message -> {
+
+            // 设置消息的过期时间，单位是毫秒
+            message.getMessageProperties().setExpiration("7000");
+
+            return message;
+        };
+
+        rabbitTemplate.convertAndSend(EXCHANGE_TIMEOUT, ROUTING_KEY_TIMEOUT, "Test timeout", postProcessor);
+    }
+
+    @Test
+    public void testSendMultiMessage() {
+        for (int i = 0; i < 20; i++) {
+            rabbitTemplate.convertAndSend(
+                    EXCHANGE_NORMAL,
+                    ROUTING_KEY_NORMAL,
+                    "测试死信情况2：消息数量超过队列的最大容量" + i);
+        }
+    }
+
+    @Test
+    public void test05SendMessageDelay() {
+
+        // 创建消息后置处理器对象
+        MessagePostProcessor postProcessor = message -> {
+
+            // 设置消息过期时间（以毫秒为单位）
+            // x-delay 参数必须基于 x-delayed-message-exchange 插件才能生效
+            message.getMessageProperties().setHeader("x-delay", "10000");
+
+            return message;
+        };
+
+        // 发送消息
+        rabbitTemplate.convertAndSend(
+                EXCHANGE_DELAY,
+                ROUTING_KEY_DELAY,
+                "Test delay message by plugin " + new SimpleDateFormat("HH:mm:ss").format(new Date()),
+                postProcessor);
+    }
+
+    public static final String EXCHANGE_PRIORITY = "exchange.test.priority";
+    public static final String ROUTING_KEY_PRIORITY = "routing.key.test.priority";
+
+    @Test
+    public void test06SendMessage() {
+        rabbitTemplate.convertAndSend(EXCHANGE_PRIORITY, ROUTING_KEY_PRIORITY, "message test proirity 3", message -> {
+
+            // 消息本身的优先级数值
+            // 切记：不能超过 x-max-priority:	10
+            message.getMessageProperties().setPriority(3);
+
+            return message;
+        });
+    }
 }
+
 ```
 
 通过调整代码，测试如下三种情况：
