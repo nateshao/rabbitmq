@@ -1,6 +1,7 @@
 package com.nateshao.producer;
 
 
+import com.nateshao.producer.mq.RabbitMQProducerMainType;
 import org.junit.jupiter.api.Test;
 import org.springframework.amqp.core.MessagePostProcessor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -16,24 +17,43 @@ import java.util.Date;
  * @Date 2024/5/29 16:00
  * @Version 1.0
  */
-@SpringBootTest
+@SpringBootTest(classes = RabbitMQProducerMainType.class)
 public class RabbitMQTest {
 
-    public static final String EXCHANGE_DIRECT = "exchange.direct.order";
-    public static final String EXCHANGE_TIMEOUT = "exchange.test.timeout";
-    public static final String ROUTING_KEY = "order";
+    public static final String EXCHANGE_DIRECT     = "exchange.direct.order";
+    public static final String EXCHANGE_TIMEOUT    = "exchange.test.timeout";
+    public static final String ROUTING_KEY         = "order";
     public static final String ROUTING_KEY_TIMEOUT = "routing.key.test.timeout";
-    public static final String EXCHANGE_NORMAL = "exchange.normal.video";
-    public static final String ROUTING_KEY_NORMAL = "routing.key.normal.video";
-    public static final String EXCHANGE_DELAY = "exchange.test.delay";
-    public static final String ROUTING_KEY_DELAY = "routing.key.test.delay";
+    public static final String EXCHANGE_NORMAL     = "exchange.normal.video";
+    public static final String ROUTING_KEY_NORMAL  = "routing.key.normal.video";
+    public static final String EXCHANGE_DELAY      = "exchange.test.delay";
+    public static final String ROUTING_KEY_DELAY   = "routing.key.test.delay";
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
+    /**
+     * 验证交换机错误
+     */
     @Test
-    public void test01SendMessage() {
-        rabbitTemplate.convertAndSend(EXCHANGE_DIRECT, ROUTING_KEY + "~", "Message Test Confirm~~~ ~~~");
+    public void testExchangeDirectErrorSendMessage() {
+        rabbitTemplate.convertAndSend(EXCHANGE_DIRECT + "000", ROUTING_KEY, "Message Test Confirm~~~ ~~~");
+    }
+
+    /**
+     * 验证路由地址写错
+     */
+    @Test
+    public void testRoutingErrorMessage() {
+        rabbitTemplate.convertAndSend(EXCHANGE_DIRECT, ROUTING_KEY + "routing ~", "Message Test Confirm~~~ ~~~");
+    }
+
+    /**
+     * 验证备份交换机
+     */
+    @Test
+    public void testExchangeBackupErrorSendMessage() {
+        rabbitTemplate.convertAndSend(EXCHANGE_DIRECT, ROUTING_KEY, "testExchangeBackupErrorSendMessage~~~ ~~~");
     }
 
     @Test
@@ -42,6 +62,7 @@ public class RabbitMQTest {
             rabbitTemplate.convertAndSend(EXCHANGE_DIRECT, ROUTING_KEY, "Test Prefetch " + i);
         }
     }
+
 
     @Test
     public void test03SendMessage() {
@@ -96,7 +117,7 @@ public class RabbitMQTest {
                 postProcessor);
     }
 
-    public static final String EXCHANGE_PRIORITY = "exchange.test.priority";
+    public static final String EXCHANGE_PRIORITY    = "exchange.test.priority";
     public static final String ROUTING_KEY_PRIORITY = "routing.key.test.priority";
 
     @Test
@@ -106,7 +127,6 @@ public class RabbitMQTest {
             // 消息本身的优先级数值
             // 切记：不能超过 x-max-priority:	10
             message.getMessageProperties().setPriority(3);
-
             return message;
         });
     }

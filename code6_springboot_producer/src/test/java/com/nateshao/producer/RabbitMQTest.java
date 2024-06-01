@@ -1,11 +1,12 @@
 package com.nateshao.producer;
 
+import com.nateshao.producer.mp.RabbitMQProducerMainType;
 import org.junit.jupiter.api.Test;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+@SpringBootTest(classes = RabbitMQProducerMainType.class)
 class RabbitMQTest {
 
     @Test
@@ -20,7 +21,7 @@ class RabbitMQTest {
 
     @Test
     public void test01SendMessage() {
-        rabbitTemplate.convertAndSend(EXCHANGE_DIRECT, ROUTING_KEY, "Hello Rabbit!SpringBoot!");
+        rabbitTemplate.convertAndSend(EXCHANGE_DIRECT, ROUTING_KEY, "Hello Rabbit!我是千羽!");
     }
 
 }
